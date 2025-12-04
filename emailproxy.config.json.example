@@ -1,0 +1,128 @@
+{
+  "Servers": [
+    {
+      "Name": "IMAP-1993",
+      "Type": "IMAP",
+      "LocalPort": 1993,
+      "ServerAddress": "outlook.office365.com",
+      "ServerPort": 993,
+      "LocalAddress": "127.0.0.1",
+      "ServerStartTls": false,
+      "LocalStartTls": false,
+      "LocalCertificatePath": null,
+      "LocalKeyPath": null
+    },
+    {
+      "Name": "POP-1995",
+      "Type": "POP",
+      "LocalPort": 1995,
+      "ServerAddress": "outlook.office365.com",
+      "ServerPort": 995,
+      "LocalAddress": "127.0.0.1",
+      "ServerStartTls": false,
+      "LocalStartTls": false,
+      "LocalCertificatePath": null,
+      "LocalKeyPath": null
+    },
+    {
+      "Name": "SMTP-1587",
+      "Type": "SMTP",
+      "LocalPort": 1587,
+      "ServerAddress": "smtp-mail.outlook.com",
+      "ServerPort": 587,
+      "LocalAddress": "127.0.0.1",
+      "ServerStartTls": true,
+      "LocalStartTls": false,
+      "LocalCertificatePath": null,
+      "LocalKeyPath": null
+    },
+    {
+      "Name": "IMAP-2993",
+      "Type": "IMAP",
+      "LocalPort": 2993,
+      "ServerAddress": "imap.gmail.com",
+      "ServerPort": 993,
+      "LocalAddress": "127.0.0.1",
+      "ServerStartTls": false,
+      "LocalStartTls": false,
+      "LocalCertificatePath": null,
+      "LocalKeyPath": null
+    },
+    {
+      "Name": "POP-2995",
+      "Type": "POP",
+      "LocalPort": 2995,
+      "ServerAddress": "pop.gmail.com",
+      "ServerPort": 995,
+      "LocalAddress": "127.0.0.1",
+      "ServerStartTls": false,
+      "LocalStartTls": false,
+      "LocalCertificatePath": null,
+      "LocalKeyPath": null
+    },
+    {
+      "Name": "SMTP-2465",
+      "Type": "SMTP",
+      "LocalPort": 2465,
+      "ServerAddress": "smtp.gmail.com",
+      "ServerPort": 465,
+      "LocalAddress": "127.0.0.1",
+      "ServerStartTls": false,
+      "LocalStartTls": false,
+      "LocalCertificatePath": null,
+      "LocalKeyPath": null
+    }
+  ],
+  "Accounts": [
+    {
+      "EmailAddress": "your.office365.or.outlook.address@example.com",
+      "PermissionUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "TokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      "OAuth2Scope": "https://outlook.office.com/IMAP.AccessAsUser.All https://outlook.office.com/POP.AccessAsUser.All https://outlook.office.com/SMTP.Send offline_access",
+      "RedirectUri": "http://localhost",
+      "ClientId": "*** your client id here ***",
+      "ClientSecret": "*** your client secret here (remove this line if a secret is not required) ***",
+      "ClientSecretEncrypted": null,
+      "OAuth2Flow": "AuthorizationCode",
+      "UsePkce": false,
+      "TokenSalt": null,
+      "TokenIterations": null,
+      "AccessToken": null,
+      "AccessTokenExpiry": null,
+      "RefreshToken": null,
+      "LastActivity": null,
+      "OAuth2Resource": null,
+      "RedirectListenAddress": null,
+      "JwtCertificatePath": null,
+      "JwtKeyPath": null
+    },
+    {
+      "EmailAddress": "your.email@gmail.com",
+      "PermissionUrl": "https://accounts.google.com/o/oauth2/auth",
+      "TokenUrl": "https://oauth2.googleapis.com/token",
+      "OAuth2Scope": "https://mail.google.com/",
+      "RedirectUri": "http://localhost",
+      "ClientId": "*** your client id here ***",
+      "ClientSecret": "*** your client secret here ***",
+      "ClientSecretEncrypted": null,
+      "OAuth2Flow": "AuthorizationCode",
+      "UsePkce": false,
+      "TokenSalt": null,
+      "TokenIterations": null,
+      "AccessToken": null,
+      "AccessTokenExpiry": null,
+      "RefreshToken": null,
+      "LastActivity": null,
+      "OAuth2Resource": null,
+      "RedirectListenAddress": null,
+      "JwtCertificatePath": null,
+      "JwtKeyPath": null
+    }
+  ],
+  "Advanced": {
+    "DeleteAccountTokenOnPasswordError": true,
+    "EncryptClientSecretOnFirstUse": false,
+    "UseLoginPasswordAsClientCredentialsSecret": false,
+    "AllowCatchAllAccounts": false
+  }
+}
