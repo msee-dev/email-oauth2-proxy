@@ -59,14 +59,35 @@ The configuration file includes:
 
 ## Installing and Running the Service
 
-### Using the GUI (Recommended)
+### Quick Installation (Using PowerShell Script)
+
+1. Open PowerShell as Administrator
+2. Navigate to the repository root
+3. Run the installation script:
+   ```powershell
+   .\install.ps1
+   ```
+
+The script will:
+- Check for the service executable
+- Install the Windows Service
+- Configure service recovery options
+- Start the service
+- Display next steps
+
+To uninstall later:
+```powershell
+.\uninstall.ps1
+```
+
+### Using the GUI (Alternative Method)
 
 1. Launch the configuration GUI as Administrator
 2. Go to the "Service Control" tab
 3. Click "Install Service" to install the Windows Service
 4. Click "Start Service" to start the proxy
 
-### Using Command Line
+### Using Command Line (Manual Method)
 
 1. Build the service:
    ```powershell
