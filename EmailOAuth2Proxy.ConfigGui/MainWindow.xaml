@@ -1,0 +1,173 @@
+﻿<Window x:Class="EmailOAuth2Proxy.ConfigGui.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmailOAuth2Proxy.ConfigGui"
+        mc:Ignorable="d"
+        Title="Email OAuth 2.0 Proxy Configuration" Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Text="Email OAuth 2.0 Proxy Configuration" 
+                       FontSize="24" FontWeight="Bold" 
+                       Margin="0,0,0,10"/>
+            <TextBlock Text="Configure proxy servers and email accounts for OAuth 2.0 authentication" 
+                       FontSize="12" Foreground="Gray"/>
+        </StackPanel>
+
+        <!-- Main Content -->
+        <TabControl Grid.Row="1" Name="MainTabControl">
+            <!-- Servers Tab -->
+            <TabItem Header="Proxy Servers">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Name="ServersDataGrid" 
+                              AutoGenerateColumns="False" 
+                              CanUserAddRows="True"
+                              CanUserDeleteRows="True"
+                              Margin="0,0,0,10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100"/>
+                            <DataGridComboBoxColumn Header="Type" 
+                                                    SelectedItemBinding="{Binding Type}" 
+                                                    Width="80">
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="ComboBox">
+                                        <Setter Property="ItemsSource" Value="{Binding Source={StaticResource ServerTypes}}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="ComboBox">
+                                        <Setter Property="ItemsSource" Value="{Binding Source={StaticResource ServerTypes}}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
+                            <DataGridTextColumn Header="Local Port" Binding="{Binding LocalPort}" Width="80"/>
+                            <DataGridTextColumn Header="Local Address" Binding="{Binding LocalAddress}" Width="120"/>
+                            <DataGridTextColumn Header="Server Address" Binding="{Binding ServerAddress}" Width="200"/>
+                            <DataGridTextColumn Header="Server Port" Binding="{Binding ServerPort}" Width="80"/>
+                            <DataGridCheckBoxColumn Header="STARTTLS" Binding="{Binding ServerStartTls}" Width="80"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Name="AddServerButton" Content="Add Server" Width="100" Margin="5" Click="AddServerButton_Click"/>
+                        <Button Name="RemoveServerButton" Content="Remove Server" Width="100" Margin="5" Click="RemoveServerButton_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Accounts Tab -->
+            <TabItem Header="Email Accounts">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ListBox Name="AccountsListBox" 
+                             Grid.Row="1"
+                             DisplayMemberPath="EmailAddress"
+                             SelectionChanged="AccountsListBox_SelectionChanged"
+                             Margin="0,0,0,10"/>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Name="AddAccountButton" Content="Add Account" Width="100" Margin="5" Click="AddAccountButton_Click"/>
+                        <Button Name="EditAccountButton" Content="Edit Account" Width="100" Margin="5" Click="EditAccountButton_Click"/>
+                        <Button Name="RemoveAccountButton" Content="Remove Account" Width="100" Margin="5" Click="RemoveAccountButton_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Advanced Tab -->
+            <TabItem Header="Advanced Settings">
+                <StackPanel Margin="10">
+                    <CheckBox Name="DeleteTokenOnErrorCheckBox" 
+                              Content="Delete account token on password error" 
+                              Margin="0,5"/>
+                    <CheckBox Name="EncryptSecretCheckBox" 
+                              Content="Encrypt client secret on first use" 
+                              Margin="0,5"/>
+                    <CheckBox Name="UsePasswordAsSecretCheckBox" 
+                              Content="Use login password as client credentials secret" 
+                              Margin="0,5"/>
+                    <CheckBox Name="AllowCatchAllCheckBox" 
+                              Content="Allow catch-all accounts" 
+                              Margin="0,5"/>
+                    
+                    <TextBlock Text="Configuration File Location:" 
+                               FontWeight="Bold" 
+                               Margin="0,20,0,5"/>
+                    <TextBox Name="ConfigFilePathTextBox" 
+                             IsReadOnly="True" 
+                             Background="LightGray"/>
+                </StackPanel>
+            </TabItem>
+
+            <!-- Service Control Tab -->
+            <TabItem Header="Service Control">
+                <StackPanel Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Windows Service Control" 
+                               FontSize="18" 
+                               FontWeight="Bold" 
+                               Margin="0,0,0,20"
+                               HorizontalAlignment="Center"/>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Name="InstallServiceButton" 
+                                Content="Install Service" 
+                                Width="150" 
+                                Height="40" 
+                                Margin="10"
+                                Click="InstallServiceButton_Click"/>
+                        <Button Name="UninstallServiceButton" 
+                                Content="Uninstall Service" 
+                                Width="150" 
+                                Height="40" 
+                                Margin="10"
+                                Click="UninstallServiceButton_Click"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                        <Button Name="StartServiceButton" 
+                                Content="Start Service" 
+                                Width="150" 
+                                Height="40" 
+                                Margin="10"
+                                Click="StartServiceButton_Click"/>
+                        <Button Name="StopServiceButton" 
+                                Content="Stop Service" 
+                                Width="150" 
+                                Height="40" 
+                                Margin="10"
+                                Click="StopServiceButton_Click"/>
+                    </StackPanel>
+                    
+                    <TextBlock Name="ServiceStatusTextBlock" 
+                               Text="Service Status: Unknown" 
+                               Margin="0,20,0,0"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+        <!-- Footer Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Name="SaveButton" Content="Save Configuration" Width="150" Margin="5" Click="SaveButton_Click"/>
+            <Button Name="CancelButton" Content="Close" Width="100" Margin="5" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

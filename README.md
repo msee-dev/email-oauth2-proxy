@@ -1,6 +1,11 @@
 # Email OAuth 2.0 Proxy<a id="email-oauth-20-proxy"></a>
 Transparently add OAuth 2.0 support to IMAP/POP/SMTP client applications, scripts or any other email use-cases that don't support this authentication method.
 
+> **🆕 .NET Windows Service Edition Available!**  
+> A native .NET version with Windows Service support and WPF configuration GUI is now available.  
+> See [README-DOTNET.md](README-DOTNET.md) for instructions on using the Windows Service edition.  
+> The original Python version (below) continues to be fully supported.
+
 <div align="center">
   <br><strong>Email OAuth 2.0 Proxy is sponsored by</strong><br><br>
   <a href="https://auth-email.com/?ref=emailproxy">
