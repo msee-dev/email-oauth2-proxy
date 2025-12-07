@@ -1,0 +1,64 @@
+<Window x:Class="EmailOAuth2Proxy.ConfigGui.AccountEditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmailOAuth2Proxy.ConfigGui"
+        mc:Ignorable="d"
+        Title="Edit Account" Height="600" Width="600"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Account Configuration" FontSize="18" FontWeight="Bold" Margin="0,0,0,20"/>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <Label Content="Email Address *" FontWeight="Bold"/>
+                <TextBox Name="EmailAddressTextBox" Margin="0,0,0,10"/>
+
+                <Label Content="Permission URL" FontWeight="Bold"/>
+                <TextBox Name="PermissionUrlTextBox" Margin="0,0,0,10"/>
+
+                <Label Content="Token URL *" FontWeight="Bold"/>
+                <TextBox Name="TokenUrlTextBox" Margin="0,0,0,10"/>
+
+                <Label Content="OAuth 2.0 Scope" FontWeight="Bold"/>
+                <TextBox Name="OAuth2ScopeTextBox" 
+                         TextWrapping="Wrap" 
+                         AcceptsReturn="True"
+                         Height="60"
+                         Margin="0,0,0,10"/>
+
+                <Label Content="Redirect URI" FontWeight="Bold"/>
+                <TextBox Name="RedirectUriTextBox" Margin="0,0,0,10"/>
+
+                <Label Content="Client ID *" FontWeight="Bold"/>
+                <TextBox Name="ClientIdTextBox" Margin="0,0,0,10"/>
+
+                <Label Content="Client Secret" FontWeight="Bold"/>
+                <TextBox Name="ClientSecretTextBox" Margin="0,0,0,10"/>
+
+                <Label Content="OAuth 2.0 Flow" FontWeight="Bold"/>
+                <ComboBox Name="OAuth2FlowComboBox" Margin="0,0,0,10">
+                    <ComboBoxItem Content="Authorization Code" IsSelected="True"/>
+                    <ComboBoxItem Content="Client Credentials"/>
+                    <ComboBoxItem Content="Password"/>
+                    <ComboBoxItem Content="Device"/>
+                    <ComboBoxItem Content="Service Account"/>
+                </ComboBox>
+
+                <CheckBox Name="UsePkceCheckBox" Content="Use PKCE (Proof Key for Code Exchange)" Margin="0,5"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Name="SaveButton" Content="Save" Width="100" Margin="5" Click="SaveButton_Click"/>
+            <Button Name="CancelButton" Content="Cancel" Width="100" Margin="5" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
