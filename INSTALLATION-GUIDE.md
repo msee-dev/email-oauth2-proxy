@@ -154,14 +154,50 @@ Client Secret: [Your Client Secret]
 
 ## First-Time Authentication
 
-**Note**: The current version requires manual OAuth 2.0 authentication setup. Full automated browser-based authentication will be added in a future update.
+The proxy now includes **browser-based OAuth 2.0 authentication** for easy setup!
 
-For now, you'll need to:
-1. Manually obtain OAuth 2.0 tokens using your provider's OAuth flow
-2. Save them in the configuration file
-3. The proxy will handle token refresh automatically
+### Using Browser Authentication (Recommended)
 
-A future update will include automatic browser popup for authentication.
+1. **Open the Configuration GUI**
+2. **Go to the "Email Accounts" tab**
+3. **Select your account** from the list
+4. **Click "Authenticate Account"**
+5. **Your default browser will open** to the OAuth login page
+6. **Log in and grant permissions** when prompted
+7. **The browser will show a success message** when complete
+8. **Return to the Configuration GUI** - your account is now authenticated!
+
+The proxy will automatically:
+- Open the correct OAuth login page
+- Receive the authentication callback
+- Exchange the authorization code for access tokens
+- Save the tokens securely in the configuration
+- Refresh tokens automatically when they expire
+
+### Authentication Tips
+
+- **First-time setup**: Use the "Authenticate Account" button after adding a new account
+- **Re-authentication**: If a token expires or is revoked, select the account and click "Authenticate Account" again
+- **Multiple accounts**: Authenticate each account separately using the same process
+- **Redirect URI**: Make sure your OAuth app's redirect URI is set to `http://localhost` (or match what you configured)
+
+### Troubleshooting Authentication
+
+**Browser doesn't open:**
+- Check that you have a default browser configured
+- Try opening the browser manually and pasting the URL (shown in error messages)
+
+**"Invalid redirect URI" error:**
+- Verify your OAuth app configuration matches the redirect URI in the account settings
+- For localhost, ensure your OAuth app allows `http://localhost` (no port number needed for OAuth 2.0 flows)
+
+**"Invalid client" error:**
+- Double-check your Client ID and Client Secret
+- Verify the OAuth app hasn't been disabled or deleted
+
+**Token refresh issues:**
+- Make sure you requested the correct scopes (including `offline_access` for Office 365)
+- Verify your OAuth app has permission to issue refresh tokens
 
 ## Managing the Service
 

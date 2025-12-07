@@ -50,6 +50,7 @@ EmailOAuth2Proxy.sln                    # Visual Studio solution file
 - ✅ Configuration file in user's AppData folder
 
 ### 3. OAuth 2.0 Support
+- ✅ Browser-based authentication with automatic token acquisition
 - ✅ Authorization Code flow
 - ✅ Client Credentials flow
 - ✅ Resource Owner Password Credentials flow
@@ -58,6 +59,8 @@ EmailOAuth2Proxy.sln                    # Visual Studio solution file
 - ✅ PKCE (Proof Key for Code Exchange) support
 - ✅ Token refresh functionality
 - ✅ Multiple OAuth 2.0 providers support
+- ✅ Local HTTP server for OAuth callback handling
+- ✅ State parameter validation (CSRF protection)
 
 ### 4. Security
 - ✅ AES-256 encryption for token storage
@@ -76,12 +79,14 @@ EmailOAuth2Proxy.sln                    # Visual Studio solution file
 ### 6. WPF Configuration GUI
 - ✅ Server configuration tab
 - ✅ Account management tab
+- ✅ Browser-based OAuth authentication button
 - ✅ Advanced settings tab
 - ✅ Service control tab (install/uninstall/start/stop)
 - ✅ DataGrid for server configuration
 - ✅ Account editor dialog
 - ✅ Service status display
 - ✅ Configuration file path display
+- ✅ Real-time authentication feedback
 
 ### 7. Installation & Deployment
 - ✅ Build script (build.bat)
@@ -145,23 +150,20 @@ EmailOAuth2Proxy.sln                    # Visual Studio solution file
    - Framework-dependent deployment for smaller size
 
 ### Features Not Yet Implemented
-1. **Browser-Based OAuth Authentication**
-   - Python version: Integrated browser popup
-   - .NET version: Requires manual token acquisition (planned for future)
 
-2. **System Tray Integration**
+1. **System Tray Integration**
    - Python version: Menu bar/taskbar icon with status
    - .NET version: Service runs in background, GUI for configuration only
 
-3. **Cross-Platform Support**
+2. **Cross-Platform Support**
    - Python version: macOS, Windows, Linux
    - .NET version: Windows-only (WPF and Windows Service are Windows-specific)
 
-4. **Plugin System**
+3. **Plugin System**
    - Python version: Plugin support in plugins branch
    - .NET version: Not yet implemented
 
-5. **Advanced OAuth Flows**
+4. **Advanced OAuth Flows**
    - JWT certificate credentials (OAuth2Service has structure, not fully integrated)
    - Google Workspace service accounts (OAuth2Service has structure, not fully integrated)
 
@@ -221,23 +223,18 @@ token_url = https://...
 ## Future Enhancements
 
 ### High Priority
-1. **Browser-Based OAuth Flow**
-   - Implement WebView2 for in-app authentication
-   - Automatic token acquisition
-   - User-friendly authentication experience
-
-2. **System Tray Integration**
+1. **System Tray Integration**
    - System tray icon with context menu
    - Quick access to common functions
    - Status notifications
 
-3. **Comprehensive Testing**
+2. **Comprehensive Testing**
    - Unit tests for Core library
    - Integration tests for services
    - End-to-end testing on Windows
 
 ### Medium Priority
-4. **Enhanced Error Handling**
+3. **Enhanced Error Handling**
    - Better error messages
    - Detailed logging
    - User-friendly error dialogs
@@ -248,19 +245,19 @@ token_url = https://...
    - Desktop shortcuts
    - Start menu integration
 
-6. **Documentation**
+5. **Documentation**
    - Video tutorials
    - Screenshots in documentation
    - Troubleshooting guide expansion
 
 ### Low Priority
-7. **Advanced Features**
+6. **Advanced Features**
    - Plugin system (like Python version)
    - Certificate-based authentication
    - Multiple configuration profiles
    - Import from Python configuration
 
-8. **UI Enhancements**
+7. **UI Enhancements**
    - Dark mode support
    - Configuration validation with inline errors
    - Account testing before saving

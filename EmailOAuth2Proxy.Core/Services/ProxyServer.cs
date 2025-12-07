@@ -197,6 +197,7 @@ public interface ILogger
 {
     void LogInformation(string message);
     void LogError(Exception exception, string message);
+    void LogError(string message);
     void LogDebug(string message);
     void LogDebug(Exception exception, string message);
     void LogTrace(string message);

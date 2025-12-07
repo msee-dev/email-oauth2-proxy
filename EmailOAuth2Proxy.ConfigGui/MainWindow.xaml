@@ -87,7 +87,8 @@
                     <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Name="AddAccountButton" Content="Add Account" Width="100" Margin="5" Click="AddAccountButton_Click"/>
                         <Button Name="EditAccountButton" Content="Edit Account" Width="100" Margin="5" Click="EditAccountButton_Click"/>
-                        <Button Name="RemoveAccountButton" Content="Remove Account" Width="100" Margin="5" Click="RemoveAccountButton_Click"/>
+                        <Button Name="AuthenticateAccountButton" Content="Authenticate Account" Width="150" Margin="5" Click="AuthenticateAccountButton_Click"/>
+                        <Button Name="RemoveAccountButton" Content="Remove Account" Width="120" Margin="5" Click="RemoveAccountButton_Click"/>
                     </StackPanel>
                 </Grid>
             </TabItem>

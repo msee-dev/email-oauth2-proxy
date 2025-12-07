@@ -148,7 +148,103 @@ public partial class MainWindow : Window
     private void AccountsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         EditAccountButton.IsEnabled = AccountsListBox.SelectedItem != null;
+        AuthenticateAccountButton.IsEnabled = AccountsListBox.SelectedItem != null;
         RemoveAccountButton.IsEnabled = AccountsListBox.SelectedItem != null;
+    }
+
+    private async void AuthenticateAccountButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (AccountsListBox.SelectedItem is not AccountConfiguration account)
+        {
+            return;
+        }
+
+        try
+        {
+            // Validate account configuration
+            if (string.IsNullOrWhiteSpace(account.ClientId))
+            {
+                MessageBox.Show("Account must have a Client ID configured before authentication.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(account.PermissionUrl) || string.IsNullOrWhiteSpace(account.TokenUrl))
+            {
+                MessageBox.Show("Account must have Permission URL and Token URL configured.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Disable the button during authentication
+            AuthenticateAccountButton.IsEnabled = false;
+            AuthenticateAccountButton.Content = "Authenticating...";
+
+            // Create services
+            var logger = new GuiLogger();
+            var oauth2Service = new OAuth2Service(logger);
+            var browserService = new OAuth2BrowserService(oauth2Service, logger);
+
+            // Start authentication
+            MessageBox.Show(
+                "Your default browser will open for authentication.\n\n" +
+                "After logging in and granting permissions, the browser will show a success message.\n\n" +
+                "You can then close the browser window and return here.",
+                "Browser Authentication",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+
+            var tokenResponse = await browserService.AuthenticateAsync(account);
+
+            if (tokenResponse != null && !string.IsNullOrEmpty(tokenResponse.AccessToken))
+            {
+                // Update account with tokens
+                account.AccessToken = tokenResponse.AccessToken;
+                account.RefreshToken = tokenResponse.RefreshToken;
+                account.AccessTokenExpiry = tokenResponse.ExpiresAt;
+                account.LastActivity = DateTime.UtcNow;
+
+                // Save configuration
+                if (_configuration != null)
+                {
+                    _configuration.Accounts = new List<AccountConfiguration>(_accounts);
+                    _configService.SaveConfiguration(_configuration);
+                }
+
+                MessageBox.Show(
+                    $"Successfully authenticated account: {account.EmailAddress}\n\n" +
+                    $"Access token obtained and saved.\n" +
+                    $"Token expires: {tokenResponse.ExpiresAt?.ToLocalTime():g}",
+                    "Authentication Successful",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Authentication failed. Please check:\n\n" +
+                    "1. Your OAuth client credentials are correct\n" +
+                    "2. The redirect URI matches your OAuth app configuration\n" +
+                    "3. You granted all required permissions\n" +
+                    "4. Check the error log for more details",
+                    "Authentication Failed",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(
+                $"Error during authentication: {ex.Message}\n\n" +
+                "Please check your configuration and try again.",
+                "Error",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
+        finally
+        {
+            // Re-enable the button
+            AuthenticateAccountButton.IsEnabled = AccountsListBox.SelectedItem != null;
+            AuthenticateAccountButton.Content = "Authenticate Account";
+        }
     }
 
     private void InstallServiceButton_Click(object sender, RoutedEventArgs e)
@@ -300,5 +396,41 @@ public partial class MainWindow : Window
         }
 
         return string.Empty;
+    }
+}
+
+/// <summary>
+/// Simple logger implementation for GUI
+/// </summary>
+internal class GuiLogger : Core.Services.ILogger
+{
+    public void LogInformation(string message)
+    {
+        Debug.WriteLine($"[INFO] {message}");
+    }
+
+    public void LogError(Exception exception, string message)
+    {
+        Debug.WriteLine($"[ERROR] {message}: {exception.Message}");
+    }
+
+    public void LogError(string message)
+    {
+        Debug.WriteLine($"[ERROR] {message}");
+    }
+
+    public void LogDebug(string message)
+    {
+        Debug.WriteLine($"[DEBUG] {message}");
+    }
+
+    public void LogDebug(Exception exception, string message)
+    {
+        Debug.WriteLine($"[DEBUG] {message}: {exception.Message}");
+    }
+
+    public void LogTrace(string message)
+    {
+        Debug.WriteLine($"[TRACE] {message}");
     }
 }

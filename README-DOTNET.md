@@ -192,33 +192,34 @@ sc delete EmailOAuth2ProxyService
 
 ✅ **Windows Service**: Runs automatically in the background
 ✅ **WPF Configuration GUI**: Easy-to-use graphical interface
+✅ **Browser-Based OAuth Authentication**: Automatic OAuth 2.0 authentication with browser popup
 ✅ **IMAP/POP/SMTP Support**: Full protocol support
 ✅ **OAuth 2.0 Flows**: Supports multiple OAuth 2.0 authentication flows
 ✅ **Multiple Accounts**: Manage multiple email accounts simultaneously
 ✅ **Secure Storage**: Configuration stored in user's AppData folder
+✅ **Token Refresh**: Automatic token refresh when expired
 
 ## Differences from Python Version
 
 This .NET version provides:
 - Native Windows Service integration
 - Modern WPF-based configuration GUI
+- Browser-based OAuth 2.0 authentication with automatic token acquisition
 - JSON-based configuration (vs INI-style in Python)
 - Improved Windows integration
 
 ## Known Limitations
 
 - Currently Windows-only (Windows Service and WPF are Windows-specific)
-- OAuth 2.0 authentication flow requires manual token acquisition setup
 - Some advanced Python proxy features may not be fully implemented
 
 ## Future Enhancements
 
-- [ ] Full OAuth 2.0 authentication flow with browser popup
-- [ ] Token refresh automation
 - [ ] System tray integration
 - [ ] Enhanced error handling and logging
 - [ ] Support for more OAuth 2.0 providers
 - [ ] Certificate-based authentication
+- [ ] MSI installer package
 
 ## License
 

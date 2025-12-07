@@ -119,14 +119,26 @@ Password: any-password-you-like (for token encryption only)
 - ✅ The password is used only for local token encryption
 - ✅ Use the **same password** across all clients for same account
 
-## Step 5: First Connection
+## Step 5: Authenticate Your Account
 
-**Note**: The current version requires manual OAuth token setup. A future update will add automatic browser-based authentication.
+**New Feature: Browser-Based OAuth Authentication!**
 
-For now, when your email client tries to connect:
-1. The proxy will need valid OAuth tokens
-2. You'll need to manually obtain and add tokens to the configuration
-3. Or wait for the next version with automatic authentication
+1. **Open the Configuration GUI**
+2. **Go to "Email Accounts" tab**
+3. **Select your account**
+4. **Click "Authenticate Account"**
+5. **Your browser will open** - log in and grant permissions
+6. **Wait for success message** in browser
+7. **Done!** Your account is now authenticated
+
+The proxy will automatically refresh tokens when needed.
+
+## Step 6: Test Your Connection
+
+Try connecting with your email client. The proxy should now:
+- ✅ Accept connections from your email client
+- ✅ Use the OAuth tokens to authenticate with the server
+- ✅ Proxy all email traffic securely
 
 ## Troubleshooting
 
@@ -141,9 +153,14 @@ For now, when your email client tries to connect:
 - Disable any firewall blocking localhost
 
 ### "Authentication failed"
-- Current version requires manual token setup
+- Click "Authenticate Account" in the Configuration GUI
 - Verify your OAuth client credentials are correct
-- Check credentials haven't expired
+- Check your OAuth app hasn't been disabled
+
+### "Browser doesn't open"
+- Check you have a default browser set
+- Try manually opening the authentication URL (shown in error)
+- Verify redirect URI matches OAuth app configuration
 
 ### Need More Help?
 - Read [INSTALLATION-GUIDE.md](INSTALLATION-GUIDE.md)
@@ -154,7 +171,7 @@ For now, when your email client tries to connect:
 ## What's Next?
 
 ### Upcoming Features
-- 🔜 Automatic browser-based OAuth authentication
+- ✅ Browser-based OAuth authentication (Now Available!)
 - 🔜 System tray integration
 - 🔜 MSI installer
 - 🔜 Pre-built releases

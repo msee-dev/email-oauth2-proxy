@@ -75,6 +75,7 @@ internal class ProxyLogger : Core.Services.ILogger
 
     public void LogInformation(string message) => _logger.LogInformation(message);
     public void LogError(Exception exception, string message) => _logger.LogError(exception, message);
+    public void LogError(string message) => _logger.LogError(message);
     public void LogDebug(string message) => _logger.LogDebug(message);
     public void LogDebug(Exception exception, string message) => _logger.LogDebug(exception, message);
     public void LogTrace(string message) => _logger.LogTrace(message);
